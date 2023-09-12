@@ -1,1 +1,27 @@
-kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wget-pod
+  namespace: horizontal-scale
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: wget-pod
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wget-pod
+    spec:
+      containers:
+      - args:
+        - -c 
+        - "while sleep 0.01; do wget -q -O- http://php-apache; done"     
+        command:
+        - /bin/sh
+        image: busybox:1.28
+        name: wget-pod
+        
+
+
+
