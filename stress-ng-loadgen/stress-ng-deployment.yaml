@@ -16,7 +16,7 @@ spec:
       containers:
       - args:
         - -c
-        - "70"
+        - "50"
         - -l
         - "100"
         - -v
@@ -26,6 +26,6 @@ spec:
         name: stress-ng
         resources:
           limits:
-            cpu: 150m
+            cpu: 100m
           requests:
             cpu: 50m
