@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+  labels:
+    app: php-apache
+    release: kube-prom-stack
+  name: php-apache
+  namespace: observability
+spec:
+  endpoints:
+  - path: /metrics
+    port: nodeexport
+  namespaceSelector:
+    matchNames:
+    - horizontal-scale
+  selector:
+    matchLabels:
+      app: php-apache
