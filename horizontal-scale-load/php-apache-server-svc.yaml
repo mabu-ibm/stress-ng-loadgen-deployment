@@ -35,5 +35,6 @@ metadata:
 spec:
   ports:
   - port: 80
+    name: web
   selector:
     app: php-apache
