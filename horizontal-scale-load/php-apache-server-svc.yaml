@@ -6,11 +6,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      run: php-apache
+      app: php-apache
   template:
     metadata:
       labels:
-        run: php-apache
+        app: php-apache
     spec:
       containers:
       - name: php-apache
@@ -30,9 +30,10 @@ metadata:
   name: php-apache
   namespace: horizontal-scale
   labels:
-    run: php-apache
+    app: php-apache
+    
 spec:
   ports:
   - port: 80
   selector:
-    run: php-apache
+    app: php-apache
