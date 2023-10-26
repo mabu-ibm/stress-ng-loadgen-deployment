@@ -9,7 +9,7 @@
   n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
 
   ineum('reportingUrl', 'https://instana.fritz.box:446/eum/');
-  ineum('key', 'zxfaoKJ8TXSg6C-Pf09lqA');
+  ineum('key', 'SPmxh_n2RVOiUdGiOxljWw');
   ineum('trackSessions');
 </script>
 <script defer crossorigin="anonymous" src="https://instana.fritz.box:446/eum/eum.min.js"></script>";
