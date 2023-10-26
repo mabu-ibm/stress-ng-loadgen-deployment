@@ -36,11 +36,10 @@ metadata:
   namespace: horizontal-scale
   labels:
     app: php-apache
-selector:
-    app: php-apache
 spec:
+  selector:
+    app: php-apache
   type: NodePort
-  
   ports:
   - port: 80
     name: web
@@ -51,5 +50,9 @@ spec:
     protocol: TCP
     targetPort: 9117
     nodePort: 31502
-  selector:
-    app: php-apache
+
+
+
+
+
+
