@@ -36,8 +36,11 @@ metadata:
   namespace: horizontal-scale
   labels:
     app: php-apache
-
+selector:
+    app: php-apache
 spec:
+  type: NodePort
+  
   ports:
   - port: 80
     name: web
