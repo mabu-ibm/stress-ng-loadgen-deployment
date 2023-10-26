@@ -4,4 +4,13 @@
     $x += sqrt($x);
   }
   echo "OK!";
+  echo "<script>
+  (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},
+  n.q=[],n.v=2,n.l=1*new Date)})(window,"InstanaEumObject","ineum");
+
+  ineum('reportingUrl', 'https://instana.fritz.box:446/eum/');
+  ineum('key', 'zxfaoKJ8TXSg6C-Pf09lqA');
+  ineum('trackSessions');
+</script>
+<script defer crossorigin="anonymous" src="https://instana.fritz.box:446/eum/eum.min.js"></script>";
 ?>
