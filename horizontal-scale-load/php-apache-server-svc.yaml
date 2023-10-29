@@ -4,6 +4,7 @@ metadata:
   name: php-apache
   namespace: horizontal-scale
 spec:
+  replicas: 0
   selector:
     matchLabels:
       app: php-apache
