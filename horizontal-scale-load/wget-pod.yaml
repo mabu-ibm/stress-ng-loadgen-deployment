@@ -4,7 +4,7 @@ metadata:
   name: wget-pod
   namespace: horizontal-scale
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: wget-pod
