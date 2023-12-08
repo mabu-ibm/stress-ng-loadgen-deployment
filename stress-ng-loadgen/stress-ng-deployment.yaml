@@ -13,6 +13,7 @@ spec:
       labels:
         app.kubernetes.io/name: stress-ng
     spec:
+      nodeName: node14
       containers:
       - args:
         - -c
