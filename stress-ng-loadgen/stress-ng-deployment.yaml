@@ -4,7 +4,7 @@ metadata:
   name: stress-ng
   namespace: stress-ng
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app.kubernetes.io/name: stress-ng
