@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wget-pod
+  namespace: wgetload
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: wget-pod
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: wget-pod
+    spec:
+      containers:
+      - args:
+        - -c 
+        - "while sleep 0.01; do wget -q -O- http://fillheap90.fillheap90.cluster.local; done"     
+        command:
+        - /bin/sh
+        image: busybox:1.28
+        name: wget-pod
+        
