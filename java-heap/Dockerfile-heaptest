@@ -1,0 +1,16 @@
+#FROM openjdk
+FROM maven:3.9.0-amazoncorretto-19
+COPY src JavaDocker
+COPY manifest.txt JavaDocker
+WORKDIR JavaDocker
+RUN mkdir -p bin
+RUN javac -d bin heaptest/heaptest.java
+WORKDIR bin
+RUN /bin/ls -l
+RUN jar cfm heaptest.jar /JavaDocker/manifest.txt heaptest/*.class
+#COPY heaptest.jar /bin/heaptest.jar
+CMD [ "/bin/ls", "-l" ]
+#WORKDIR bin
+CMD ["java", "-jar", "-Xms64m", "-Xmx128m", "heaptest.jar"]
+
+# Build cmd on Docker : docker buildx build --push --platform linux/amd64,linux/arm64 -t mbx1010/serverfillheap .
