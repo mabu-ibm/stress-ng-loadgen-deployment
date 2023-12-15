@@ -78,47 +78,50 @@ public class heaptest {
 /* Sample java handler
 */
 class TestHandler implements HttpHandler {
-public void handle(HttpExchange exchange) throws IOException {
-    String requestMethod = exchange.getRequestMethod();
-    Runtime rtx = Runtime.getRuntime();
-    String Track = "<!<!DOCTYPE html>"
-    		+ "<html>\n"
-    		+ "<head>\n"
-    		+ "<script>\n"
-    		+ "  (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},\n"
-    		+ "  n.q=[],n.v=2,n.l=1*new Date)})(window,\"InstanaEumObject\",\"ineum\");\n"
-    		+ "\n"
-    		+ "  ineum('reportingUrl', 'https://instana.fritz.box/eum/');\n"
-    		+ "  ineum('key', 'e-AdrSQQQ8mdIBUsgMFYWg');\n"
-    		+ "  ineum('trackSessions');\n"
-    		+ "</script>\n"
-    		+ "<script defer crossorigin=\"anonymous\" src=\"https://instana.fritz.box/eum/eum.min.js\"></script>" 
-    		+ "</head>\n "
-            + "</html>" ;
-    if (requestMethod.equalsIgnoreCase("GET")) {
-        URI responseURI = exchange.getRequestURI();
-        String pathName = responseURI.getPath();
-        Headers responseHeaders = exchange.getResponseHeaders();
-        responseHeaders.set("Content-Type", "text/plain");
-        exchange.sendResponseHeaders(200, 0);
+    public void handle(HttpExchange exchange) throws IOException {
+        String requestMethod = exchange.getRequestMethod();
+        Runtime rtx = Runtime.getRuntime();
 
-        OutputStream responseBody = exchange.getResponseBody();
-        Headers requestHeaders = exchange.getRequestHeaders();
-        Set<String> keySet = requestHeaders.keySet();
-        Iterator<String> iter = keySet.iterator();
-        while (iter.hasNext()) {
-            String key = iter.next();
-            List values = requestHeaders.get(key);
-            String s = key + " = " + values.toString() + "\n";
-            responseBody.write(s.getBytes());
+        if (requestMethod.equalsIgnoreCase("GET")) {
+            URI responseURI = exchange.getRequestURI();
+            Headers responseHeaders = exchange.getResponseHeaders();
+            responseHeaders.set("Content-Type", "text/html");
+
+            exchange.sendResponseHeaders(200, 0); // Send HTTP status and headers
+
+            OutputStream responseBody = exchange.getResponseBody();
+
+            // HTML content
+            String htmlContent = "<!DOCTYPE html>"
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    (function(s,t,a,n){s[t]||(s[t]=a,n=s[a]=function(){n.q.push(arguments)},\n"
+                + "    n.q=[],n.v=2,n.l=1*new Date)})(window,\"InstanaEumObject\",\"ineum\");\n"
+                + "    ineum('reportingUrl', 'https://instana.fritz.box/eum/');\n"
+                + "    ineum('key', 'e-AdrSQQQ8mdIBUsgMFYWg');\n"
+                + "    ineum('trackSessions');\n"
+                + "  </script>\n"
+                + "  <script defer crossorigin=\"anonymous\" src=\"https://instana.fritz.box/eum/eum.min.js\"></script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <!-- HTML content goes here -->\n"
+                + "</body>\n"
+                + "</html>";
+
+            // Write HTML content to response body
+            responseBody.write(htmlContent.getBytes());
+
+            // Optionally, write additional diagnostic information after the HTML content
+            String pathString = "Pathname = " + responseURI.getPath() + "\n";
+            String maxHeap = "\n" + "maxMemory Call = " + rtx.maxMemory() + "\n";
+            String freeHeap = "\n" + "freeMemory = " + rtx.freeMemory() + "\n";
+
+            responseBody.write(maxHeap.getBytes());
+            responseBody.write(freeHeap.getBytes());
+            responseBody.write(pathString.getBytes());
+
+            responseBody.close(); // Make sure to close the responseBody
         }
-        String pathString = "Pathname = " + pathName + "\n";
-        String maxHeap = "\n" + "maxMemory Call=" + rtx.maxMemory()+ "\n";
-        String freeHeap = "\n" + "freeMemory =" + rtx.freeMemory()+ "\n";
-        responseBody.write(Track.getBytes());
-        responseBody.write(maxHeap.getBytes());
-        responseBody.write(freeHeap.getBytes());
-        responseBody.write(pathString.getBytes());
-        responseBody.close();
     }
 }
