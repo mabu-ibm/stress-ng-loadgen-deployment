@@ -29,4 +29,4 @@ spec:
             cpu: 300m
           requests:
             cpu: 200m
-      nodeName: kube-worker-node3
+     # nodeName: kube-worker-node3
