@@ -26,7 +26,7 @@ spec:
         name: stress-ng
         resources:
           limits:
-            cpu: 300m
+            cpu: 800m
           requests:
             cpu: 200m
      # nodeName: kube-worker-node3
