@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stress-ng
-  namespace: stress-ng
+  name: stress-ng1
+  namespace: stress-ng1
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
-      app.kubernetes.io/name: stress-ng
+      app.kubernetes.io/name: stress-ng1
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: stress-ng
+        app.kubernetes.io/name: stress-ng1
     spec:
       containers:
       - args:
@@ -22,11 +22,11 @@ spec:
         - -v
         command:
         - /stress-ng
-        image: alexeiled/stress-ng
+        image: alexeiled/stress-ng1
         name: stress-ng
         resources:
           limits:
             cpu: 300m
           requests:
             cpu: 200m
-   #   nodeName: node14
+      nodeName: kube-worker-node3
