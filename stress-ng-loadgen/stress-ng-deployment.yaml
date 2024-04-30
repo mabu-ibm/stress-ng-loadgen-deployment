@@ -22,7 +22,7 @@ spec:
         - -v
         command:
         - /stress-ng
-        image: alexeiled/stress-ng1
+        image: alexeiled/stress-ng
         name: stress-ng
         resources:
           limits:
