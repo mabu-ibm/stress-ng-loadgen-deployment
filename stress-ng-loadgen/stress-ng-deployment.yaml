@@ -26,6 +26,6 @@ spec:
         name: stress-ng
         resources:
           limits:
-            cpu: 900m
+            cpu: 100m
           requests:
-            cpu: 200m
+            cpu: 50m
