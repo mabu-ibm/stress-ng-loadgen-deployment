@@ -16,9 +16,9 @@ spec:
       containers:
       - args:
         - -c
-        - "150"
+        - "1"  # Last Number of worker use 150
         - -l
-        - "100"
+        - "1"  # percentage cpu Load use 100
         - -v
         command:
         - /stress-ng
