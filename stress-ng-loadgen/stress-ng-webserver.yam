@@ -1,0 +1,21 @@
+# stress-ng-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress-ng-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-ng-webserver
+  template:
+    metadata:
+      labels:
+        app: stress-ng-webserver
+    spec:
+      containers:
+      - name: stress-ng-webserver
+        image: mbx1010/stress-ng-webserver:latest
+        ports:
+        - containerPort: 8080
+
