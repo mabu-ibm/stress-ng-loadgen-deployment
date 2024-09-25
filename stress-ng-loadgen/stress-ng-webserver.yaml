@@ -3,6 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stress-ng-deployment
+  labels: 
+    name: stress-ng-deployment
+    instana-autotrace: true
 spec:
   replicas: 1
   selector:
@@ -12,6 +15,7 @@ spec:
     metadata:
       labels:
         app: stress-ng-webserver
+        instana-autotrace: true
     spec:
       containers:
       - name: stress-ng-webserver
