@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: stress-ng-webserver
-        image: mbx1010/stress-ng-webserver:latest
+        image: python:3.9-slim
         ports:
         - containerPort: 8080
         resources:
@@ -27,4 +27,5 @@ spec:
             cpu: 100m
           requests:
             cpu: 50m
-
+        command: ["python", "-m", "http.server", "8080"]
+      restartPolicy: Always
