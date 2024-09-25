@@ -28,4 +28,20 @@ spec:
           requests:
             cpu: 50m
         command: ["python", "-m", "http.server", "8080"]
+      - name: stress-ng
+        args:
+        - -c
+        - "20"  # Last Number of worker use 150
+        - -l
+        - "100"  # percentage cpu Load use 100
+        - -v
+        command:
+        - /stress-ng
+        image: alexeiled/stress-ng
+        name: stress-ng
+        resources:
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 50m
       restartPolicy: Always
