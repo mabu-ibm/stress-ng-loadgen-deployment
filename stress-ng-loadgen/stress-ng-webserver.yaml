@@ -28,7 +28,7 @@ spec:
           requests:
             cpu: 50m
         command: ["python", "-m", "http.server", "8080"]
-      - name: stress-ng
+      - name: stress-ng1
         args:
         - -c
         - "20"  # Last Number of worker use 150
