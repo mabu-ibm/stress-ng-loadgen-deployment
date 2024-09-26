@@ -1,19 +1,22 @@
-# Use a base image with both stress-ng and a lightweight web server
-FROM ubuntu:latest
+# Verwende das offizielle Python Image als Basis
+FROM python:3.9-slim
 
-# Install necessary packages: stress-ng, curl, and a simple web server (like python3 http.server)
-RUN apt-get update && apt-get install -y \
-    stress-ng \
-    python3 \
-    curl \
-    && apt-get clean
-
-# Create a directory for the web server
+# Setze das Arbeitsverzeichnis im Container
 WORKDIR /app
-RUN echo "Welcome to the Stress Test Server" > index.html
 
-# Start a simple HTTP server and stress-ng in the background
-# This script runs both stress-ng and the webserver
-CMD bash -c "python3 -m http.server 8080 & stress-ng -c 10 -l 100 -v "
+# Kopiere die `requirements.txt` in den Container
+COPY requirements.txt .
+
+# Installiere die Abhängigkeiten
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Kopiere den Rest der Applikation
+COPY . .
+
+# Exponiere den Port 8080
+EXPOSE 8080
+
+# Starte die Flask-Anwendung
+CMD ["python", "app.py"]
 
 
