@@ -18,8 +18,8 @@ spec:
         instana-autotrace: "true"
     spec:
       containers:
-      - name: stress-ng-webserver
-        image: python:3.9-slim
+      - name: stress-ng-flaskwebserver
+        image: mbx1010/flask-app
         ports:
         - containerPort: 8080
         resources:
@@ -27,7 +27,6 @@ spec:
             cpu: 100m
           requests:
             cpu: 50m
-        command: ["python", "-m", "http.server", "8080"]
       - name: stress-ng1
         args:
         - -c
