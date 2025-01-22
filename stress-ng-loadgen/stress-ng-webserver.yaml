@@ -30,7 +30,7 @@ spec:
       - name: stress-ng1
         args:
         - -c
-        - "20"  # Last Number of worker use 150
+        - "150"  # Last Number of worker use 150
         - -l
         - "100"  # percentage cpu Load use 100
         - -v
